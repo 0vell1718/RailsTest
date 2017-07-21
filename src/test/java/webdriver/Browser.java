@@ -152,7 +152,7 @@ public final class Browser {
      * maximizes the window
      */
     public void windowMaximise() {
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
 
     }
 

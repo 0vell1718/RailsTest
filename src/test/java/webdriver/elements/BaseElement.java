@@ -9,6 +9,7 @@ import webdriver.BaseEntity;
 import webdriver.Browser;
 import webdriver.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 /**
@@ -25,6 +26,7 @@ public abstract class BaseElement extends BaseEntity {
     protected String name;
     protected By locator;
     protected RemoteWebElement element;
+    private ArrayList<WebElement> elementList;
 
     /**
      * The simple constructor, name will be extracted
@@ -209,6 +211,19 @@ public abstract class BaseElement extends BaseEntity {
     public String getAttribute(String attr){
         waitForIsElementPresent();
         return element.getAttribute(attr);
+    }
+
+    public String getNotification(){
+        waitForIsElementPresent();
+        elementList = new ArrayList<>(element.findElements(locator));
+
+        for(WebElement el : elementList){
+            String s = el.getAttribute("class");
+            if(!s.contains("none")){
+                return el.getText();
+            }
+        }
+        return "Notification empty";
     }
 }
 

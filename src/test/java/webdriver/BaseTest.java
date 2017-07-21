@@ -1,7 +1,5 @@
 package webdriver;
 
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
@@ -10,26 +8,11 @@ import org.testng.annotations.Test;
  * methods for logging and field test settings (options)
  */
 public abstract class BaseTest extends BaseEntity {
-    protected String email;
-    protected String password;
-    protected String token;
-    protected String imagesFolder;
-    protected String loadImage;
 
     /**
      * To override.
      */
     public abstract void runTest();
-
-    @Parameters({"email", "password", "token", "imagesFolder", "loadImage"})
-    @BeforeTest
-    public void getParameters(String email, String password, String token, String imagesFolder, String loadImage){
-        this.email = email;
-        this.password = password;
-        this.token = token;
-        this.imagesFolder = imagesFolder;
-        this.loadImage = loadImage;
-    }
 
     /**
      * Test
