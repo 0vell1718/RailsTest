@@ -3,32 +3,67 @@ package demo;
 import webdriver.BaseEntity;
 
 import java.util.ArrayList;
-
 /**
  * Created by Михаил on 24.07.2017.
  */
 public class BattleField extends BaseEntity {
-    private Integer four_deck = 1;
-    private Integer three_deck = 2;
-    private Integer double_deck = 3;
-    private Integer one_deck = 4;
+    private Integer fourDeck = 1;
+    private Integer threeDeck = 2;
+    private Integer doubleDeck = 3;
+    private Integer oneDeck = 4;
 
     private ArrayList<Point> missPoints = new ArrayList<>();
     private ArrayList<Point> hitPoints = new ArrayList<>();
+
     private ArrayList<Point> ship = new ArrayList<>();
-    private boolean isShipHit = false;
+    private ArrayList<Point> verticalPossibleHitPoints = new ArrayList<>();
+    private ArrayList<Point> horizontalPossibleHitPoints = new ArrayList<>();
 
 
-    public Point setNextHitPoint(Point lastHitPoint){
-        isShipHit = true;
-        addDiagonalPointsToMiss(lastHitPoint);
-        
+    public void addPossibleHitPointsLists(Point lastHitPoint){
+        hitPoints.add(lastHitPoint);
+        ship.add(lastHitPoint);
 
-
-        return new Point(0,0);
+        addDiagonalPointsToMissList(lastHitPoint);
+        addPossibleHitPointsToLists(lastHitPoint);
+        deleteUnnecessaryHitPointsFromLists(lastHitPoint);
     }
 
-    private void addDiagonalPointsToMiss(Point centerPoint){
+    public Point getNextPossibleHitPoint(){
+        if(verticalPossibleHitPoints.isEmpty() && horizontalPossibleHitPoints.isEmpty()){
+            destroyShip();
+            return getNextEmptyPoint();
+        }else if(verticalPossibleHitPoints.isEmpty() && !horizontalPossibleHitPoints.isEmpty()){
+            return horizontalPossibleHitPoints.get(0);
+        }else if(!verticalPossibleHitPoints.isEmpty() && horizontalPossibleHitPoints.isEmpty()){
+            return verticalPossibleHitPoints.get(0);
+        }else {
+            return verticalPossibleHitPoints.get(0);
+        }
+    }
+
+    public Point getNextEmptyPoint() {
+        Point p = new Point(0, 0, "miss");
+        if (fourDeck > 0 || threeDeck > 0 || doubleDeck > 0) {
+
+        }else if(oneDeck > 0){
+            for (int x = 0; x < 9; x++) {
+                for (int y = 0; y < 9; y++) {
+                    p = new Point(x, y, "miss");
+                    if (!missPoints.contains(p)){
+                        p.setStatus("hit");
+                        if (!hitPoints.contains(p)) {
+                            p.setStatus("empty");
+                        }
+                    }
+                }
+            }
+        }
+        return p;
+    }
+
+
+    private void addDiagonalPointsToMissList(Point centerPoint){
         Integer x = centerPoint.getX();
         Integer y = centerPoint.getY();
 
@@ -45,18 +80,82 @@ public class BattleField extends BaseEntity {
         }
     }
 
-    public Point setNextEmptyPoint(Point lastMissPoint){
+    private void addPossibleHitPointsToLists(Point centerPoint){
+        //vertical points
+        Point p1 = new Point(centerPoint.getX(), centerPoint.getY() - 1);
+        Point p2 = new Point(centerPoint.getX(), centerPoint.getY() + 1);
+        addPossibleHitPointsToList(verticalPossibleHitPoints, p1, p2);
 
-        return new Point(0,0);
+        //horizontal points
+        Point p3 = new Point(centerPoint.getX() - 1, centerPoint.getY());
+        Point p4 = new Point(centerPoint.getX() + 1, centerPoint.getY());
+        addPossibleHitPointsToList(horizontalPossibleHitPoints, p3, p4);
     }
 
+    private void addPossibleHitPointsToList(ArrayList<Point> pointList, Point ... points){
+        for(Point p : points){
+            p.setStatus("miss");
+            if(!pointList.contains(p) && !missPoints.contains(p)){
+                p.setStatus("hit");
+                if(!hitPoints.contains(p)){
+                    if(p.getX() < 0 || p.getX() > 9 || p.getY() < 0 || p.getY() > 9){
+                        continue;
+                    }else{
+                        p.setStatus("empty");
+                        pointList.add(p);
+                    }
+                }
+            }
+        }
+    }
 
-    public void addMissPoint(Point missPoint){
+    private void deleteUnnecessaryHitPointsFromLists(Point lastHitPoint){
+        if(verticalPossibleHitPoints.contains(lastHitPoint)){
+            for(Point p : horizontalPossibleHitPoints){
+                if(!missPoints.contains(p)){
+                    missPoints.add(p);
+                }
+            }
+            horizontalPossibleHitPoints.clear();
+        }else if(horizontalPossibleHitPoints.contains(lastHitPoint)) {
+            for (Point p : verticalPossibleHitPoints) {
+                if(!missPoints.contains(p)){
+                    missPoints.add(p);
+                }
+            }
+            verticalPossibleHitPoints.clear();
+        }
+    }
+
+    private void destroyShip(){
+        Integer size = ship.size();
+        String s = "";
+
+        switch(size) {
+            case 1:
+                s = "oneDeck";
+                oneDeck--;
+                break;
+            case 2:
+                s = "twoDeck";
+                doubleDeck--;
+                break;
+            case 3:
+                s = "threeDeck";
+                threeDeck--;
+                break;
+            case 4:
+                s = "fourDeck";
+                fourDeck--;
+                break;
+        }
+
+        logger.info(" !!!! Destroyed " + s + " ship !!!! ");
+        ship.clear();
+    }
+
+    public void addPointToMissList(Point missPoint){
         missPoints.add(missPoint);
-    }
-
-    public void addHitPoint(Point hitPoint){
-        hitPoints.add(hitPoint);
     }
 
     @Override

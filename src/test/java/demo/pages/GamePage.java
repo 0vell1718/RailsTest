@@ -12,11 +12,6 @@ import java.util.Objects;
  * Created by Михаил on 24.07.2017.
  */
 public class GamePage extends BaseForm{
-    //final String init = "Разместите корабли.";
-    //final String connect = "Подключаемся к серверу.";
-    //final String waitRival = "Ожидаем противника.";
-    //final String cws = "Если вам понравилась игра, пожалуйста, оставьте отзыв о ней в интернет-магазине Google Chrome (это займет не более минуты).";
-
     final String gameStartYou = "Игра началась, ваш ход.";
     final String gameStartRival = "Игра началась, противник ходит.";
     final String moveOn = "Ваш ход.";
@@ -33,9 +28,8 @@ public class GamePage extends BaseForm{
             "/../div[@class='battlefield-table-placeholder']" +
             "//td[./div[@class='battlefield-cell-content' and @data-y='%s' and @data-x='%s']]";
 
-    private Point point = new Point(3, 3, "empty");
+    private Point point = new Point(0, 0, "empty");
     private BattleField battleField = new BattleField();
-
 
     public GamePage() {
         super(By.className("chat-gap"), "Game Page");
@@ -59,12 +53,12 @@ public class GamePage extends BaseForm{
                 String status = point.getStatus();                  //берем ее новый статус для определения дальнейших действий
 
                 if(status.contains("hit")){                         //если новый статус попадание -
-                    battleField.addHitPoint(point);                 //добавляем точку в список
-                    point = battleField.setNextHitPoint(point);     //ищем новую точку для добивания корабля
+                    battleField.addPossibleHitPointsLists(point);   //формируем списки возможных точек
+                    point = battleField.getNextPossibleHitPoint();  //берем точку из списков для добивания корабля
 
                 }else if(status.contains("miss")){                  //если новый статус мимо -
-                    battleField.addMissPoint(point);                //добавляем точку в список
-                    point = battleField.setNextEmptyPoint(point);   //ищем новую пустую точку
+                    battleField.addPointToMissList(point);          //добавляем точку в список промахов
+                    point = battleField.getNextEmptyPoint();        //ищем новую точку для выстрела
                 }
             }else if(rivalStep()){                                  //если ход соперника - повторяем цикл
                 continue;
