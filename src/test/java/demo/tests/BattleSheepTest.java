@@ -5,11 +5,18 @@ import webdriver.BaseTest;
 public class BattleSheepTest extends BaseTest {
 
     public void runTest() {
-        logStep("Open Main Page & Login");
+        logStep("Open Main Page & Start Game");
         MainPage mainPage = new MainPage();
         //mainPage.randomOpponent();
-        //mainPage.randomShips();
-        //mainPage.startGame();
-        mainPage.nextStep();
+        mainPage.friendOpponent();
+        mainPage.randomShips();
+        mainPage.startGame();
+
+        logStep("Open Game Page");
+        GamePage gamePage = new GamePage();
+        gamePage.startGameWait();
+
+        logStep("Play Game!");
+        gamePage.playGame();
     }
 }
