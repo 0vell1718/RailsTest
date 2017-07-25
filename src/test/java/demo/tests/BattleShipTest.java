@@ -2,7 +2,7 @@ package demo.tests;
 import demo.pages.*;
 import webdriver.BaseTest;
 
-public class BattleSheepTest extends BaseTest {
+public class BattleShipTest extends BaseTest {
 
     public void runTest() {
         logStep("Open Main Page & Start Game");

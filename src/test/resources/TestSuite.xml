@@ -10,7 +10,7 @@
 		<parameter name="loadImage" value="LoadImage.jpg"/>
 
 		<classes>
- 			<class name="demo.tests.BattleSheepTest" />
+ 			<class name="demo.tests.BattleShipTest" />
         </classes>
 	</test>
 </suite>

@@ -46,25 +46,23 @@ public class GamePage extends BaseForm{
     public void playGame(){
         while (endGameStatus()){
 
-            if(myStep()){                                           //проверяем наш ли ход
-                shot(point);                                        //первый выстрел будет в точку [0,0], далее по ситуации
+            if(myStep()){                                                   //проверяем наш ли ход
+                shot(point);                                                //первый выстрел будет в точку [0,0], далее по ситуации
 
-                point.setStatus(getPointStatus(point));             //обновляем статус точки
-                String status = point.getStatus();                  //берем ее новый статус для определения дальнейших действий
+                point.setStatus(getPointStatus(point));                     //обновляем статус точки
+                String status = point.getStatus();                          //берем ее новый статус для определения дальнейших действий
 
-                if(status.contains("hit")){                         //если новый статус попадание -
-                    battleField.addPossibleHitPointsLists(point);   //формируем списки возможных точек
-                    point = battleField.getNextPossibleHitPoint();  //берем точку из списков для добивания корабля
+                if(status.contains("hit")){                                 //если новый статус попадание -
+                    logger.info("Попадание x:" + point.getX() + " y:" + point.getY());
+                    battleField.addPossibleHitPointsLists(point);           //формируем списки возможных точек
+                    point = battleField.getNextPossibleHitPoint(point);     //берем точку из списков для добивания корабля
 
-                }else if(status.contains("miss")){                  //если новый статус мимо -
-                    battleField.addPointToMissList(point);          //добавляем точку в список промахов
-                    point = battleField.getNextEmptyPoint();        //ищем новую точку для выстрела
+                }else if(status.contains("miss")){                          //если новый статус мимо -
+                    logger.info("Мимо x:" + point.getX() + " y:" + point.getY());
+                    point = battleField.getNextEmptyPoint(point);           //ищем новую точку для выстрела
                 }
-            }else if(rivalStep()){                                  //если ход соперника - повторяем цикл
+            }else if(rivalStep()){                                          //если ход соперника - повторяем цикл
                 continue;
-            } else{                                                 //если ход ничей - выводим что же случилось)
-                endGameStatus();
-                break;
             }
         }
     }
