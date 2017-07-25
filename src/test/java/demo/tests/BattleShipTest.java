@@ -7,8 +7,7 @@ public class BattleShipTest extends BaseTest {
     public void runTest() {
         logStep("Open Main Page & Start Game");
         MainPage mainPage = new MainPage();
-        //mainPage.randomOpponent();
-        mainPage.friendOpponent();
+        mainPage.randomOpponent();
         mainPage.randomShips();
         mainPage.startGame();
 

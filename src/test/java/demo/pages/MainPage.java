@@ -14,7 +14,6 @@ public class MainPage extends BaseForm {
 
     private Button btnRndShips = new Button(By.xpath("//span[contains(text(), 'Случайным образом')]"), "Random Ships Button");
     private Button btnRndOpponent = new Button(By.className("battlefield-start-choose_rival-variant-link"), "Random Opponent Button");
-    private Button btnFriend = new Button(By.partialLinkText("знакомый"), "Friend Button");
     private Button btnStart = new Button(By.className("battlefield-start-button"), "Start Button");
 
     public MainPage(){
@@ -23,10 +22,6 @@ public class MainPage extends BaseForm {
 
     public void randomOpponent(){
         btnRndOpponent.click();
-    }
-
-    public void friendOpponent(){
-        btnFriend.click();
     }
 
     public void randomShips(){

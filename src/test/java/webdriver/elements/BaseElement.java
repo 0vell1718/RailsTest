@@ -160,7 +160,7 @@ public abstract class BaseElement extends BaseEntity {
      */
     public boolean isPresent() {
         boolean isPresent = isPresent(TIMEOUT_WAIT_0);
-        info("is present : " + isPresent);
+        //info("is present : " + isPresent);
         return isPresent;
     }
 
@@ -201,29 +201,9 @@ public abstract class BaseElement extends BaseEntity {
         return false;
     }
 
-
-    public String getSrcFromCssValue(String cssValue){
-        waitForIsElementPresent();
-        String s = element.getCssValue(cssValue);
-        return s.substring(5, s.lastIndexOf("\""));
-    }
-
-    public String getAttribute(String attr){
+    public String getLocatorAttribute(String attr){
         waitForIsElementPresent();
         return element.getAttribute(attr);
-    }
-
-    public String getNotification(){
-        waitForIsElementPresent();
-        elementList = new ArrayList<>(element.findElements(locator));
-
-        for(WebElement el : elementList){
-            String s = el.getAttribute("class");
-            if(!s.contains("none")){
-                return el.getText();
-            }
-        }
-        return "Notification empty";
     }
 }
 

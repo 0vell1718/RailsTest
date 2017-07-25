@@ -6,8 +6,6 @@ import org.openqa.selenium.By;
 import webdriver.BaseForm;
 import webdriver.elements.Label;
 
-import java.util.Objects;
-
 /**
  * Created by Михаил on 24.07.2017.
  */
@@ -22,6 +20,7 @@ public class GamePage extends BaseForm{
     final String serverError = "Сервер недоступен.";
     final String gameError = "Непредвиденная ошибка. Дальнейшая игра невозможна.";
 
+    private String gameStatusLocator = "//div[@class='notification notification__%s']";
     private String pointLocator = "//div[@class='battlefield battlefield__rival']//div[@class='battlefield-cell-content' " +
             "and @data-y='%s' and @data-x='%s']";
     private String pointStatusLocator = "//div[contains(text(), 'Поле противника')]" +
@@ -36,70 +35,75 @@ public class GamePage extends BaseForm{
     }
 
     public void startGameWait(){
-        String status = getGameStatus();
-        if (!Objects.equals(status, gameStartYou) && !Objects.equals(status, gameStartRival) &&
-                !Objects.equals(status, moveOff) && !Objects.equals(status, moveOn)) {
+        if (!myStep() && !rivalStep()) {
             startGameWait();
         }
     }
 
     public void playGame(){
+        battleField.setPointsToShot();
         while (endGameStatus()){
+            if(myStep()) {                                                                  //проверяем наш ли ход
+                point.setStatus(getPointStatus(point));
 
-            if(myStep()){                                                   //проверяем наш ли ход
-                shot(point);                                                //первый выстрел будет в точку [0,0], далее по ситуации
-
-                point.setStatus(getPointStatus(point));                     //обновляем статус точки
-                String status = point.getStatus();                          //берем ее новый статус для определения дальнейших действий
-
-                if(status.contains("hit")){                                 //если новый статус попадание -
-                    logger.info("Попадание x:" + point.getX() + " y:" + point.getY());
-                    battleField.addPossibleHitPointsLists(point);           //формируем списки возможных точек
-                    point = battleField.getNextPossibleHitPoint(point);     //берем точку из списков для добивания корабля
-
-                }else if(status.contains("miss")){                          //если новый статус мимо -
-                    logger.info("Мимо x:" + point.getX() + " y:" + point.getY());
-                    point = battleField.getNextEmptyPoint(point);           //ищем новую точку для выстрела
+                if (point.getStatus().contains("empty")) {
+                    shot(point);                                                            //первый выстрел будет в точку [0,0], далее по ситуации
+                    point.setStatus(getPointStatus(point));                                 //обновляем статус точки
                 }
-            }else if(rivalStep()){                                          //если ход соперника - повторяем цикл
-                continue;
+
+                if (point.getStatus().contains("hit")) {                                    //если новый статус попадание -
+                    logger.info("Hit ship! x:" + point.getX() + " y:" + point.getY());
+                    battleField.addPossibleHitPointsLists(point);                           //формируем списки возможных точек
+                    point = battleField.getNextPossibleHitPoint(point);                     //берем точку из списков для добивания корабля
+
+                } else if (point.getStatus().contains("miss")) {                            //если новый статус мимо -
+                    logger.info("Miss x:" + point.getX() + " y:" + point.getY());
+                    point = battleField.getNextEmptyPoint(point);                           //ищем новую точку для выстрела
+                }
             }
         }
     }
 
     private boolean endGameStatus(){
-        switch (getGameStatus()) {
-            case rivalLeave:
-                logger.fatal(rivalLeave);
-                return false;
-            case gameWin:
-                logger.info(gameWin);
-                return false;
-            case gameLose:
-                logger.fatal(gameLose);
-                return false;
-            case serverError:
-                logger.fatal(serverError);
-                return false;
-            case gameError:
-                logger.fatal(gameError);
-                return false;
-            default:
-                return true;
+        if(getGameStatus("rival-leave")){
+            logger.fatal(rivalLeave);
+            return false;
         }
+        if(getGameStatus("game-over-win")){
+            logger.fatal(gameWin);
+            return false;
+        }
+        if(getGameStatus("game-over-lose")){
+            logger.fatal(gameLose);
+            return false;
+        }
+        if(getGameStatus("server-error")){
+            logger.fatal(serverError);
+            return false;
+        }
+        if(getGameStatus("game-error")){
+            logger.fatal(gameError);
+            return false;
+        }
+        return true;
     }
 
     private boolean myStep(){
-        return getGameStatus().contains(gameStartYou) || getGameStatus().contains(moveOn);
+        if(getGameStatus("game-started-move-on") || getGameStatus("move-on")){
+            logger.info("Move ON!");
+            return true;
+        } else return false;
     }
 
     private boolean rivalStep(){
-        return getGameStatus().contains(gameStartRival) || getGameStatus().contains(moveOff);
+        if(getGameStatus("game-started-move-off") || getGameStatus("move-off")){
+            return true;
+        } else return false;
     }
 
     private String getPointStatus(Point point){
         String status = new Label(By.xpath(String.format(pointStatusLocator, point.getY(), point.getX())), "Point")
-                .getAttribute("class");
+                .getLocatorAttribute("class");
         String s = "";
 
         if(status.contains("battlefield-cell__hit")){
@@ -115,16 +119,10 @@ public class GamePage extends BaseForm{
 
     private void shot(Point point){
         new Label(By.xpath(String.format(pointLocator, point.getY(), point.getX())),
-                "Point y:" + point.getY() + ", x:" + point.getX() + " shot!").click();
+                "Point y:" + point.getY() + ", x:" + point.getX() + " is shot!").click();
     }
 
-    //избавиться от sleep!!!
-    private String getGameStatus() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new Label(By.xpath("//div[@class='notification-message']/parent::div"), "Label Game Status").getNotification();
+    private Boolean getGameStatus(String status) {
+        return new Label(By.xpath(String.format(gameStatusLocator, status)), "Label Game Status:" + status).isPresent();
     }
 }

@@ -20,11 +20,6 @@ public class Point extends BaseEntity {
         this.status = status;
     }
 
-    public void setCoord(Integer x, Integer y){
-        this.x = x;
-        this.y = y;
-    }
-
     public void setStatus(String status){
         this.status = status;
     }
