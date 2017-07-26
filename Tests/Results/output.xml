@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.2 (Python 3.6.1 on win32)" generated="20170726 19:28:29.050">
+<suite id="s1" name="AuthTest" source="C:\Users\Михаил\Desktop\Python\Стажировка\m.kalyn\Tests\AuthTest.robot">
+<test id="s1-t1" name="Test Auth">
+<kw name="Authenticate And assert Response Code">
+<arguments>
+<arg>user</arg>
+<arg>passwd</arg>
+<arg>200</arg>
+</arguments>
+<kw name="Authenticate" library="RestLibrary">
+<arguments>
+<arg>${HOST}</arg>
+<arg>${user}</arg>
+<arg>${password}</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20170726 19:28:31.409" level="DEBUG">Starting new HTTP connection (1): httpbin.org</msg>
+<msg timestamp="20170726 19:28:31.710" level="DEBUG">http://httpbin.org:80 "GET /basic-auth/user/passwd HTTP/1.1" 200 47</msg>
+<msg timestamp="20170726 19:28:31.711" level="INFO">${status} = 200</msg>
+<status status="PASS" starttime="20170726 19:28:31.406" endtime="20170726 19:28:31.711"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status}</arg>
+<arg>${expected_response_code}</arg>
+</arguments>
+<msg timestamp="20170726 19:28:31.712" level="DEBUG">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20170726 19:28:31.711" endtime="20170726 19:28:31.712"></status>
+</kw>
+<status status="PASS" starttime="20170726 19:28:31.406" endtime="20170726 19:28:31.712"></status>
+</kw>
+<kw name="Authenticate And assert Response Code">
+<arguments>
+<arg>users</arg>
+<arg>passwd</arg>
+<arg>401</arg>
+</arguments>
+<kw name="Authenticate" library="RestLibrary">
+<arguments>
+<arg>${HOST}</arg>
+<arg>${user}</arg>
+<arg>${password}</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20170726 19:28:31.714" level="DEBUG">Starting new HTTP connection (1): httpbin.org</msg>
+<msg timestamp="20170726 19:28:31.992" level="DEBUG">http://httpbin.org:80 "GET /basic-auth/user/passwd HTTP/1.1" 401 0</msg>
+<msg timestamp="20170726 19:28:31.993" level="INFO">${status} = 401</msg>
+<status status="PASS" starttime="20170726 19:28:31.713" endtime="20170726 19:28:31.993"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status}</arg>
+<arg>${expected_response_code}</arg>
+</arguments>
+<msg timestamp="20170726 19:28:31.993" level="DEBUG">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20170726 19:28:31.993" endtime="20170726 19:28:31.993"></status>
+</kw>
+<status status="PASS" starttime="20170726 19:28:31.712" endtime="20170726 19:28:31.994"></status>
+</kw>
+<kw name="Authenticate And assert Response Code">
+<arguments>
+<arg>user</arg>
+<arg>123qsd</arg>
+<arg>401</arg>
+</arguments>
+<kw name="Authenticate" library="RestLibrary">
+<arguments>
+<arg>${HOST}</arg>
+<arg>${user}</arg>
+<arg>${password}</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20170726 19:28:31.997" level="DEBUG">Starting new HTTP connection (1): httpbin.org</msg>
+<msg timestamp="20170726 19:28:32.276" level="DEBUG">http://httpbin.org:80 "GET /basic-auth/user/passwd HTTP/1.1" 401 0</msg>
+<msg timestamp="20170726 19:28:32.276" level="INFO">${status} = 401</msg>
+<status status="PASS" starttime="20170726 19:28:31.995" endtime="20170726 19:28:32.277"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status}</arg>
+<arg>${expected_response_code}</arg>
+</arguments>
+<msg timestamp="20170726 19:28:32.277" level="DEBUG">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20170726 19:28:32.277" endtime="20170726 19:28:32.277"></status>
+</kw>
+<status status="PASS" starttime="20170726 19:28:31.994" endtime="20170726 19:28:32.277"></status>
+</kw>
+<kw name="Authenticate And assert Response Code">
+<arguments>
+<arg>users</arg>
+<arg>asddda</arg>
+<arg>401</arg>
+</arguments>
+<kw name="Authenticate" library="RestLibrary">
+<arguments>
+<arg>${HOST}</arg>
+<arg>${user}</arg>
+<arg>${password}</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20170726 19:28:32.280" level="DEBUG">Starting new HTTP connection (1): httpbin.org</msg>
+<msg timestamp="20170726 19:28:32.550" level="DEBUG">http://httpbin.org:80 "GET /basic-auth/user/passwd HTTP/1.1" 401 0</msg>
+<msg timestamp="20170726 19:28:32.551" level="INFO">${status} = 401</msg>
+<status status="PASS" starttime="20170726 19:28:32.278" endtime="20170726 19:28:32.551"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status}</arg>
+<arg>${expected_response_code}</arg>
+</arguments>
+<msg timestamp="20170726 19:28:32.551" level="DEBUG">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20170726 19:28:32.551" endtime="20170726 19:28:32.552"></status>
+</kw>
+<status status="PASS" starttime="20170726 19:28:32.277" endtime="20170726 19:28:32.552"></status>
+</kw>
+<kw name="Authenticate And assert Response Code">
+<arguments>
+<arg>${EMPTY}</arg>
+<arg>passwd</arg>
+<arg>401</arg>
+</arguments>
+<kw name="Authenticate" library="RestLibrary">
+<arguments>
+<arg>${HOST}</arg>
+<arg>${user}</arg>
+<arg>${password}</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20170726 19:28:32.554" level="DEBUG">Starting new HTTP connection (1): httpbin.org</msg>
+<msg timestamp="20170726 19:28:32.830" level="DEBUG">http://httpbin.org:80 "GET /basic-auth/user/passwd HTTP/1.1" 401 0</msg>
+<msg timestamp="20170726 19:28:32.831" level="INFO">${status} = 401</msg>
+<status status="PASS" starttime="20170726 19:28:32.552" endtime="20170726 19:28:32.831"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status}</arg>
+<arg>${expected_response_code}</arg>
+</arguments>
+<msg timestamp="20170726 19:28:32.831" level="DEBUG">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20170726 19:28:32.831" endtime="20170726 19:28:32.831"></status>
+</kw>
+<status status="PASS" starttime="20170726 19:28:32.552" endtime="20170726 19:28:32.832"></status>
+</kw>
+<kw name="Authenticate And assert Response Code">
+<arguments>
+<arg>user</arg>
+<arg>${EMPTY}</arg>
+<arg>401</arg>
+</arguments>
+<kw name="Authenticate" library="RestLibrary">
+<arguments>
+<arg>${HOST}</arg>
+<arg>${user}</arg>
+<arg>${password}</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20170726 19:28:32.834" level="DEBUG">Starting new HTTP connection (1): httpbin.org</msg>
+<msg timestamp="20170726 19:28:33.104" level="DEBUG">http://httpbin.org:80 "GET /basic-auth/user/passwd HTTP/1.1" 401 0</msg>
+<msg timestamp="20170726 19:28:33.105" level="INFO">${status} = 401</msg>
+<status status="PASS" starttime="20170726 19:28:32.832" endtime="20170726 19:28:33.105"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status}</arg>
+<arg>${expected_response_code}</arg>
+</arguments>
+<msg timestamp="20170726 19:28:33.105" level="DEBUG">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20170726 19:28:33.105" endtime="20170726 19:28:33.105"></status>
+</kw>
+<status status="PASS" starttime="20170726 19:28:32.832" endtime="20170726 19:28:33.106"></status>
+</kw>
+<kw name="Authenticate And assert Response Code">
+<arguments>
+<arg>${EMPTY}</arg>
+<arg>${EMPTY}</arg>
+<arg>401</arg>
+</arguments>
+<kw name="Authenticate" library="RestLibrary">
+<arguments>
+<arg>${HOST}</arg>
+<arg>${user}</arg>
+<arg>${password}</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20170726 19:28:33.108" level="DEBUG">Starting new HTTP connection (1): httpbin.org</msg>
+<msg timestamp="20170726 19:28:33.380" level="DEBUG">http://httpbin.org:80 "GET /basic-auth/user/passwd HTTP/1.1" 401 0</msg>
+<msg timestamp="20170726 19:28:33.381" level="INFO">${status} = 401</msg>
+<status status="PASS" starttime="20170726 19:28:33.106" endtime="20170726 19:28:33.381"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status}</arg>
+<arg>${expected_response_code}</arg>
+</arguments>
+<msg timestamp="20170726 19:28:33.381" level="DEBUG">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20170726 19:28:33.381" endtime="20170726 19:28:33.381"></status>
+</kw>
+<status status="PASS" starttime="20170726 19:28:33.106" endtime="20170726 19:28:33.381"></status>
+</kw>
+<status status="PASS" starttime="20170726 19:28:31.405" endtime="20170726 19:28:33.381" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20170726 19:28:29.057" endtime="20170726 19:28:33.382"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="AuthTest">AuthTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
