@@ -42,6 +42,33 @@ class Rest:
         response = self.__request_qet(uri)
         return response.status_code
 
+    def add_case(self, section_id, title, priority_id, estimate, refs, template_id, steps):
+        uri = '/index.php?/api/v2/add_case/' + section_id
+        data = {'title': title, 'priority_id': priority_id, 'estimate': estimate, 'refs': refs,
+                'template_id': template_id, 'custom_steps_separated': test_steps}
+        response = self.__request_post(uri, data)
+        return response.status_code, response.json()['id']
+
+    def get_case(self, case_id):
+        uri = '/index.php?/api/v2/get_case/' + case_id
+        response = self.__request_qet(uri)
+        title = response.json()['title']
+        priority = response.json()['priority_id']
+        estimate = response.json()['estimate']
+        refs = response.json()['refs']
+        steps = response.json()['custom_steps_separated']
+        return response.status_code, title, priority, estimate, refs, steps
+
+    def add_run(self, suite_id, name, description):
+        uri = '/index.php?/api/v2/add_run/2'
+        data = {'suite_id': suite_id, 'name': name, 'description': description}
+        response = self.__request_post(uri, data)
+        return response.status_code, response.json()['id']
+
+    def get_run(self, run_id):
+        uri = '/index.php?/api/v2/get_run' + run_id
+        response = self.__request_qet(uri)
+        return response.status_code
 
 
 rest = Rest('https://testrail.a1qa.com', 'm.kalyn', '123456')
@@ -49,3 +76,9 @@ rest = Rest('https://testrail.a1qa.com', 'm.kalyn', '123456')
 # rest.add_suite('Mikhail', 'ddd')
 # rest.add_section('2122', 'section_1', 'asdas')
 # rest.get_section('1513')
+test_steps = [{'content': 'Step 1', 'expected': 'Expected Result 1'}]
+# print(rest.add_case('1513', 'test case 4', 1, '5m', "RF-1", 2, test_steps))
+# print(rest.get_case('1742'))
+# print(rest.add_run('2122', 'Mikhail', 'other'))
+
+
