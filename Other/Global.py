@@ -1,1 +1,1 @@
-HOST = 'http://httpbin.org'
+HOST = 'https://testrail.a1qa.com/index.php'
