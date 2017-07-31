@@ -55,7 +55,7 @@ class BaseElement:
         self.__send('POST', uri)
 
     def get_id(self):
-        return self.__element_id
+        return str(self.__element_id)
 
     def add_result(self, run_id, case_id, fields=None):
         uri = '/index.php?/api/v2/add_result_for_case/' + str(run_id) + '/' + str(case_id)

@@ -5,6 +5,7 @@ import string
 class Random:
     def __init__(self, size):
         self.__random_size = size
+        self.__Template_Test_Case_Text_id = 3
 
     def __random_name(self, chars=string.digits):
         return 'Auto_' + ''.join(random.choice(chars) for _ in range(self.__random_size))
@@ -16,7 +17,7 @@ class Random:
         fields = {}
         for field in args:
             if field.count('template_id'):
-                fields.__setitem__(field, 3)
+                fields.__setitem__(field, self.__Template_Test_Case_Text_id)
             elif field.count('id'):
                 fields.__setitem__(field, self.__random_id())
             else:
