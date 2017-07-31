@@ -1,165 +1,348 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.0.2 (Python 3.6.1 on win32)" generated="20170727 12:37:51.396">
-<suite id="s1" name="StreamTest" source="C:\Users\Михаил\Desktop\Python\Стажировка\m.kalyn\Tests\StreamTest.robot">
-<test id="s1-t1" name="Test Stream">
-<kw name="Stream And Assert Response Code And Lines Count">
+<robot generator="Robot 3.0.2 (Python 3.6.1 on win32)" generated="20170731 19:14:44.862">
+<suite id="s1" name="RailsTest" source="C:\Users\Михаил\Desktop\Python\Стажировка\m.kalyn\Tests\RailsTest.robot">
+<test id="s1-t1" name="My Test">
+<kw name="Create Suite With Random Fields Value">
 <arguments>
-<arg>10</arg>
-<arg>10</arg>
-<arg>200</arg>
+<arg>@{suite_fields}</arg>
 </arguments>
-<kw name="Stream" library="RestLibrary">
+<kw name="Set" library="random">
 <arguments>
-<arg>${HOST}</arg>
-<arg>${send_count}</arg>
+<arg>@{fields}</arg>
 </arguments>
 <assign>
-<var>${count}</var>
-<var>${response}</var>
+<var>${random_fields}</var>
 </assign>
-<msg timestamp="20170727 12:37:54.388" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
-<msg timestamp="20170727 12:37:54.641" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php/stream/10 HTTP/1.1" 302 0</msg>
-<msg timestamp="20170727 12:37:54.735" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/dashboard HTTP/1.1" 302 0</msg>
-<msg timestamp="20170727 12:37:54.837" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/auth/login/L2Rhc2hib2FyZC1hZDcwMmI4MTlkYmVjOGU3ZDcyYWIwZjI3MjA2YmZkY2FhYWFjZjYxMjFiZDYxYTZlYWY4N2ViNDVmZjViNTRk HTTP/1.1" 200 2734</msg>
-<msg timestamp="20170727 12:37:54.840" level="INFO">${count} = 0</msg>
-<msg timestamp="20170727 12:37:54.840" level="INFO">${response} = 200</msg>
-<status status="PASS" starttime="20170727 12:37:54.317" endtime="20170727 12:37:54.840"></status>
+<msg timestamp="20170731 19:14:45.094" level="INFO">${random_fields} = {'name': 'Auto_0833', 'description': 'Auto_3580'}</msg>
+<status status="PASS" starttime="20170731 19:14:45.094" endtime="20170731 19:14:45.094"></status>
 </kw>
-<kw name="Should Be Equal" library="BuiltIn">
-<doc>Fails if the given objects are unequal.</doc>
+<kw name="Add" library="suite">
 <arguments>
-<arg>${count}</arg>
-<arg>${expected_count}</arg>
+<arg>${None}</arg>
+<arg>${random_fields}</arg>
 </arguments>
-<msg timestamp="20170727 12:37:54.841" level="DEBUG">Argument types are:
-&lt;type 'unicode'&gt;
-&lt;type 'unicode'&gt;</msg>
-<msg timestamp="20170727 12:37:54.841" level="FAIL">0 != 10</msg>
-<msg timestamp="20170727 12:37:54.841" level="DEBUG">Traceback (most recent call last):
-  None</msg>
-<status status="FAIL" starttime="20170727 12:37:54.840" endtime="20170727 12:37:54.841"></status>
+<msg timestamp="20170731 19:14:45.109" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:45.741" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/add_suite/2 HTTP/1.1" 200 218</msg>
+<status status="PASS" starttime="20170731 19:14:45.094" endtime="20170731 19:14:45.741"></status>
 </kw>
-<status status="FAIL" starttime="20170727 12:37:54.316" endtime="20170727 12:37:54.841"></status>
+<status status="PASS" starttime="20170731 19:14:45.094" endtime="20170731 19:14:45.741"></status>
 </kw>
-<kw name="Stream And Assert Response Code And Lines Count">
-<arguments>
-<arg>ten</arg>
-<arg>0</arg>
-<arg>404</arg>
-</arguments>
-<kw name="Stream" library="RestLibrary">
-<arguments>
-<arg>${HOST}</arg>
-<arg>${send_count}</arg>
-</arguments>
+<kw name="Get Id" library="suite">
 <assign>
-<var>${count}</var>
+<var>${SUITE_ID}</var>
+</assign>
+<msg timestamp="20170731 19:14:45.741" level="INFO">${SUITE_ID} = 2199</msg>
+<status status="PASS" starttime="20170731 19:14:45.741" endtime="20170731 19:14:45.741"></status>
+</kw>
+<kw name="Assert Suite Is Present">
+<kw name="Get Status Code" library="suite">
+<assign>
 <var>${response}</var>
 </assign>
-<msg timestamp="20170727 12:37:54.845" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
-<msg timestamp="20170727 12:37:55.040" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php/stream/ten HTTP/1.1" 302 0</msg>
-<msg timestamp="20170727 12:37:55.140" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/dashboard HTTP/1.1" 302 0</msg>
-<msg timestamp="20170727 12:37:55.256" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/auth/login/L2Rhc2hib2FyZC1hZDcwMmI4MTlkYmVjOGU3ZDcyYWIwZjI3MjA2YmZkY2FhYWFjZjYxMjFiZDYxYTZlYWY4N2ViNDVmZjViNTRk HTTP/1.1" 200 2734</msg>
-<msg timestamp="20170727 12:37:55.276" level="INFO">${count} = 0</msg>
-<msg timestamp="20170727 12:37:55.277" level="INFO">${response} = 200</msg>
-<status status="PASS" starttime="20170727 12:37:54.842" endtime="20170727 12:37:55.277"></status>
+<msg timestamp="20170731 19:14:45.763" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:46.078" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/api/v2/get_suite/2199 HTTP/1.1" 200 218</msg>
+<msg timestamp="20170731 19:14:46.094" level="INFO">${response} = 200</msg>
+<status status="PASS" starttime="20170731 19:14:45.758" endtime="20170731 19:14:46.094"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
 <arguments>
-<arg>${count}</arg>
-<arg>${expected_count}</arg>
-</arguments>
-<msg timestamp="20170727 12:37:55.278" level="DEBUG">Argument types are:
-&lt;type 'unicode'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20170727 12:37:55.278" endtime="20170727 12:37:55.278"></status>
-</kw>
-<kw name="Should Be Equal" library="BuiltIn">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
+<arg>${200}</arg>
 <arg>${response}</arg>
-<arg>${expected_response_code}</arg>
 </arguments>
-<msg timestamp="20170727 12:37:55.278" level="DEBUG">Argument types are:
-&lt;type 'unicode'&gt;
-&lt;type 'unicode'&gt;</msg>
-<msg timestamp="20170727 12:37:55.278" level="FAIL">200 != 404</msg>
-<msg timestamp="20170727 12:37:55.278" level="DEBUG">Traceback (most recent call last):
-  None</msg>
-<status status="FAIL" starttime="20170727 12:37:55.278" endtime="20170727 12:37:55.278"></status>
+<msg timestamp="20170731 19:14:46.094" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" starttime="20170731 19:14:46.094" endtime="20170731 19:14:46.094"></status>
 </kw>
-<status status="FAIL" starttime="20170727 12:37:54.842" endtime="20170727 12:37:55.278"></status>
+<status status="PASS" starttime="20170731 19:14:45.756" endtime="20170731 19:14:46.094"></status>
 </kw>
-<kw name="Stream And Assert Response Code And Lines Count">
+<kw name="Create Section With SuiteID And Random Fields Value">
 <arguments>
-<arg>${empty}</arg>
-<arg>0</arg>
-<arg>404</arg>
+<arg>${SUITE_ID}</arg>
+<arg>@{section_fields}</arg>
 </arguments>
-<kw name="Stream" library="RestLibrary">
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
 <arguments>
-<arg>${HOST}</arg>
-<arg>${send_count}</arg>
+<arg>name</arg>
+<arg>description</arg>
 </arguments>
 <assign>
-<var>${count}</var>
+<var>@{field}</var>
+</assign>
+<msg timestamp="20170731 19:14:46.094" level="INFO">@{field} = [ name | description ]</msg>
+<status status="PASS" starttime="20170731 19:14:46.094" endtime="20170731 19:14:46.094"></status>
+</kw>
+<kw name="Set" library="random">
+<arguments>
+<arg>@{field}</arg>
+</arguments>
+<assign>
+<var>${fields}</var>
+</assign>
+<msg timestamp="20170731 19:14:46.094" level="INFO">${fields} = {'name': 'Auto_1532', 'description': 'Auto_2427'}</msg>
+<status status="PASS" starttime="20170731 19:14:46.094" endtime="20170731 19:14:46.094"></status>
+</kw>
+<kw name="Add" library="section">
+<arguments>
+<arg>${SUITE_ID}</arg>
+<arg>${fields}</arg>
+</arguments>
+<msg timestamp="20170731 19:14:46.110" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:46.441" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/add_section/2 HTTP/1.1" 200 117</msg>
+<status status="PASS" starttime="20170731 19:14:46.094" endtime="20170731 19:14:46.441"></status>
+</kw>
+<status status="PASS" starttime="20170731 19:14:46.094" endtime="20170731 19:14:46.441"></status>
+</kw>
+<kw name="Get Id" library="section">
+<assign>
+<var>${SECTION_ID}</var>
+</assign>
+<msg timestamp="20170731 19:14:46.457" level="INFO">${SECTION_ID} = 1516</msg>
+<status status="PASS" starttime="20170731 19:14:46.441" endtime="20170731 19:14:46.457"></status>
+</kw>
+<kw name="Assert Section Is Present">
+<kw name="Get Status Code" library="section">
+<assign>
 <var>${response}</var>
 </assign>
-<msg timestamp="20170727 12:37:55.278" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
-<msg timestamp="20170727 12:37:55.510" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php/stream/ HTTP/1.1" 302 0</msg>
-<msg timestamp="20170727 12:37:55.610" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/dashboard HTTP/1.1" 302 0</msg>
-<msg timestamp="20170727 12:37:55.725" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/auth/login/L2Rhc2hib2FyZC1hZDcwMmI4MTlkYmVjOGU3ZDcyYWIwZjI3MjA2YmZkY2FhYWFjZjYxMjFiZDYxYTZlYWY4N2ViNDVmZjViNTRk HTTP/1.1" 200 2734</msg>
-<msg timestamp="20170727 12:37:55.725" level="INFO">${count} = 0</msg>
-<msg timestamp="20170727 12:37:55.725" level="INFO">${response} = 200</msg>
-<status status="PASS" starttime="20170727 12:37:55.278" endtime="20170727 12:37:55.725"></status>
+<msg timestamp="20170731 19:14:46.461" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:46.810" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/api/v2/get_section/1516 HTTP/1.1" 200 117</msg>
+<msg timestamp="20170731 19:14:46.810" level="INFO">${response} = 200</msg>
+<status status="PASS" starttime="20170731 19:14:46.458" endtime="20170731 19:14:46.810"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
 <arguments>
-<arg>${count}</arg>
-<arg>${expected_count}</arg>
-</arguments>
-<msg timestamp="20170727 12:37:55.725" level="DEBUG">Argument types are:
-&lt;type 'unicode'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20170727 12:37:55.725" endtime="20170727 12:37:55.725"></status>
-</kw>
-<kw name="Should Be Equal" library="BuiltIn">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
+<arg>${200}</arg>
 <arg>${response}</arg>
-<arg>${expected_response_code}</arg>
 </arguments>
-<msg timestamp="20170727 12:37:55.725" level="DEBUG">Argument types are:
-&lt;type 'unicode'&gt;
-&lt;type 'unicode'&gt;</msg>
-<msg timestamp="20170727 12:37:55.725" level="FAIL">200 != 404</msg>
-<msg timestamp="20170727 12:37:55.725" level="DEBUG">Traceback (most recent call last):
-  None</msg>
-<status status="FAIL" starttime="20170727 12:37:55.725" endtime="20170727 12:37:55.725"></status>
+<msg timestamp="20170731 19:14:46.810" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" starttime="20170731 19:14:46.810" endtime="20170731 19:14:46.810"></status>
 </kw>
-<status status="FAIL" starttime="20170727 12:37:55.278" endtime="20170727 12:37:55.725"></status>
+<status status="PASS" starttime="20170731 19:14:46.458" endtime="20170731 19:14:46.810"></status>
 </kw>
-<status status="FAIL" starttime="20170727 12:37:54.299" endtime="20170727 12:37:55.725" critical="yes">Several failures occurred:
-
-1) 0 != 10
-
-2) 200 != 404
-
-3) 200 != 404</status>
+<kw name="Create Case With SectionID And Random Fields Value">
+<arguments>
+<arg>${SECTION_ID}</arg>
+<arg>@{case_fields}</arg>
+</arguments>
+<assign>
+<var>${random_fields}</var>
+</assign>
+<kw name="Set" library="random">
+<arguments>
+<arg>@{fields}</arg>
+</arguments>
+<assign>
+<var>${random_fields}</var>
+</assign>
+<msg timestamp="20170731 19:14:46.826" level="INFO">${random_fields} = {'title': 'Auto_3862', 'template_id': 3, 'type_id': 2, 'priority_id': 1, 'refs': 'Auto_4021'}</msg>
+<status status="PASS" starttime="20170731 19:14:46.810" endtime="20170731 19:14:46.826"></status>
+</kw>
+<kw name="Add" library="case">
+<arguments>
+<arg>${SECTION_ID}</arg>
+<arg>${random_fields}</arg>
+</arguments>
+<msg timestamp="20170731 19:14:46.826" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:47.142" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/add_case/1516 HTTP/1.1" 200 407</msg>
+<status status="PASS" starttime="20170731 19:14:46.826" endtime="20170731 19:14:47.142"></status>
+</kw>
+<kw name="Return From Keyword" library="BuiltIn">
+<doc>Returns from the enclosing user keyword.</doc>
+<arguments>
+<arg>${random_fields}</arg>
+</arguments>
+<msg timestamp="20170731 19:14:47.142" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20170731 19:14:47.142" endtime="20170731 19:14:47.142"></status>
+</kw>
+<msg timestamp="20170731 19:14:47.158" level="INFO">${random_fields} = {'title': 'Auto_3862', 'template_id': 3, 'type_id': 2, 'priority_id': 1, 'refs': 'Auto_4021'}</msg>
+<status status="PASS" starttime="20170731 19:14:46.810" endtime="20170731 19:14:47.158"></status>
+</kw>
+<kw name="Get Id" library="case">
+<assign>
+<var>${CASE_ID}</var>
+</assign>
+<msg timestamp="20170731 19:14:47.159" level="INFO">${CASE_ID} = 1751</msg>
+<status status="PASS" starttime="20170731 19:14:47.159" endtime="20170731 19:14:47.160"></status>
+</kw>
+<kw name="Assert Case Fields">
+<arguments>
+<arg>${random_fields}</arg>
+<arg>@{case_fields}</arg>
+</arguments>
+<kw name="Get Fields" library="case">
+<arguments>
+<arg>@{fields}</arg>
+</arguments>
+<assign>
+<var>${case_fields}</var>
+</assign>
+<msg timestamp="20170731 19:14:47.164" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:47.527" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/api/v2/get_case/1751 HTTP/1.1" 200 407</msg>
+<msg timestamp="20170731 19:14:47.527" level="INFO">${case_fields} = {'title': 'Auto_3862', 'template_id': 3, 'type_id': 2, 'priority_id': 1, 'refs': 'Auto_4021'}</msg>
+<status status="PASS" starttime="20170731 19:14:47.162" endtime="20170731 19:14:47.527"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${random_fields}</arg>
+<arg>${case_fields}</arg>
+</arguments>
+<msg timestamp="20170731 19:14:47.543" level="DEBUG">Argument types are:
+&lt;class 'dict'&gt;
+&lt;class 'dict'&gt;</msg>
+<status status="PASS" starttime="20170731 19:14:47.543" endtime="20170731 19:14:47.543"></status>
+</kw>
+<status status="PASS" starttime="20170731 19:14:47.160" endtime="20170731 19:14:47.543"></status>
+</kw>
+<kw name="Assert Case Is Present">
+<kw name="Get Status Code" library="case">
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20170731 19:14:47.543" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:47.881" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/api/v2/get_case/1751 HTTP/1.1" 200 407</msg>
+<msg timestamp="20170731 19:14:47.897" level="INFO">${response} = 200</msg>
+<status status="PASS" starttime="20170731 19:14:47.543" endtime="20170731 19:14:47.897"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${200}</arg>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20170731 19:14:47.897" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" starttime="20170731 19:14:47.897" endtime="20170731 19:14:47.897"></status>
+</kw>
+<status status="PASS" starttime="20170731 19:14:47.543" endtime="20170731 19:14:47.897"></status>
+</kw>
+<kw name="Create Run With SuiteId and Random Fields Value">
+<arguments>
+<arg>${SUITE_ID}</arg>
+<arg>@{run_fields}</arg>
+</arguments>
+<kw name="Set" library="random">
+<arguments>
+<arg>@{fields}</arg>
+</arguments>
+<assign>
+<var>${random_fields}</var>
+</assign>
+<msg timestamp="20170731 19:14:47.897" level="INFO">${random_fields} = {'name': 'Auto_8971', 'description': 'Auto_7802'}</msg>
+<status status="PASS" starttime="20170731 19:14:47.897" endtime="20170731 19:14:47.897"></status>
+</kw>
+<kw name="Add" library="run">
+<arguments>
+<arg>${SUITE_ID}</arg>
+<arg>${random_fields}</arg>
+</arguments>
+<msg timestamp="20170731 19:14:47.913" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:48.244" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/add_run/2 HTTP/1.1" 200 602</msg>
+<status status="PASS" starttime="20170731 19:14:47.897" endtime="20170731 19:14:48.265"></status>
+</kw>
+<status status="PASS" starttime="20170731 19:14:47.897" endtime="20170731 19:14:48.266"></status>
+</kw>
+<kw name="Get Id" library="run">
+<assign>
+<var>${RUN_ID}</var>
+</assign>
+<msg timestamp="20170731 19:14:48.266" level="INFO">${RUN_ID} = 1072</msg>
+<status status="PASS" starttime="20170731 19:14:48.266" endtime="20170731 19:14:48.266"></status>
+</kw>
+<kw name="Assert Run Is Present">
+<kw name="Get Status Code" library="run">
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20170731 19:14:48.266" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:48.598" level="DEBUG">https://testrail.a1qa.com:443 "GET /index.php?/api/v2/get_run/1072 HTTP/1.1" 200 602</msg>
+<msg timestamp="20170731 19:14:48.613" level="INFO">${response} = 200</msg>
+<status status="PASS" starttime="20170731 19:14:48.266" endtime="20170731 19:14:48.613"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${200}</arg>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20170731 19:14:48.613" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" starttime="20170731 19:14:48.613" endtime="20170731 19:14:48.613"></status>
+</kw>
+<status status="PASS" starttime="20170731 19:14:48.266" endtime="20170731 19:14:48.613"></status>
+</kw>
+<kw name="Add Result For Case With RunID, CaseID And Random Fields Value">
+<arguments>
+<arg>${RUN_ID}</arg>
+<arg>${CASE_ID}</arg>
+<arg>@{result_fields}</arg>
+</arguments>
+<kw name="Set" library="random">
+<arguments>
+<arg>@{fields}</arg>
+</arguments>
+<assign>
+<var>${random_fileds}</var>
+</assign>
+<msg timestamp="20170731 19:14:48.613" level="INFO">${random_fileds} = {'status_id': 2, 'comment': 'Auto_4149', 'version': 'Auto_0684', 'defects': 'Auto_0093'}</msg>
+<status status="PASS" starttime="20170731 19:14:48.613" endtime="20170731 19:14:48.613"></status>
+</kw>
+<kw name="Add Result" library="case">
+<arguments>
+<arg>${RUN_ID}</arg>
+<arg>${CASE_ID}</arg>
+<arg>${random_fileds}</arg>
+</arguments>
+<msg timestamp="20170731 19:14:48.629" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:48.998" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/add_result_for_case/1072/1751 HTTP/1.1" 200 208</msg>
+<status status="PASS" starttime="20170731 19:14:48.613" endtime="20170731 19:14:48.998"></status>
+</kw>
+<status status="PASS" starttime="20170731 19:14:48.613" endtime="20170731 19:14:48.998"></status>
+</kw>
+<kw name="Delete Elements">
+<kw name="Delete" library="run">
+<msg timestamp="20170731 19:14:49.014" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:49.345" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/delete_run/1072 HTTP/1.1" 200 0</msg>
+<status status="PASS" starttime="20170731 19:14:49.014" endtime="20170731 19:14:49.345"></status>
+</kw>
+<kw name="Delete" library="case">
+<msg timestamp="20170731 19:14:49.367" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:49.646" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/delete_case/1751 HTTP/1.1" 200 0</msg>
+<status status="PASS" starttime="20170731 19:14:49.345" endtime="20170731 19:14:49.663"></status>
+</kw>
+<kw name="Delete" library="section">
+<msg timestamp="20170731 19:14:49.668" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:49.984" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/delete_section/1516 HTTP/1.1" 200 0</msg>
+<status status="PASS" starttime="20170731 19:14:49.663" endtime="20170731 19:14:50.000"></status>
+</kw>
+<kw name="Delete" library="suite">
+<msg timestamp="20170731 19:14:50.000" level="DEBUG">Starting new HTTPS connection (1): testrail.a1qa.com</msg>
+<msg timestamp="20170731 19:14:50.365" level="DEBUG">https://testrail.a1qa.com:443 "POST /index.php?/api/v2/delete_suite/2199 HTTP/1.1" 200 0</msg>
+<status status="PASS" starttime="20170731 19:14:50.000" endtime="20170731 19:14:50.369"></status>
+</kw>
+<status status="PASS" starttime="20170731 19:14:48.998" endtime="20170731 19:14:50.369"></status>
+</kw>
+<status status="PASS" starttime="20170731 19:14:45.094" endtime="20170731 19:14:50.369" critical="yes"></status>
 </test>
-<status status="FAIL" starttime="20170727 12:37:51.396" endtime="20170727 12:37:55.741"></status>
+<status status="PASS" starttime="20170731 19:14:44.862" endtime="20170731 19:14:50.369"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1">Critical Tests</stat>
-<stat pass="0" fail="1">All Tests</stat>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="1" id="s1" name="StreamTest">StreamTest</stat>
+<stat pass="1" fail="0" id="s1" name="RailsTest">RailsTest</stat>
 </suite>
 </statistics>
 <errors>
