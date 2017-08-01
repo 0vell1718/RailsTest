@@ -1,10 +1,10 @@
 *** Settings ***
-Variables  ../Other/Global.py
-Library  ../Libriary/BaseElement.py    suite       ${HOST}     ${USER}    ${PASSWORD}     WITH NAME       suite
-Library  ../Libriary/BaseElement.py    run         ${HOST}     ${USER}    ${PASSWORD}     WITH NAME       run
-Library  ../Libriary/BaseElement.py    section     ${HOST}     ${USER}    ${PASSWORD}     WITH NAME       section
-Library  ../Libriary/BaseElement.py    case        ${HOST}     ${USER}    ${PASSWORD}     WITH NAME       case
-Library  ../Other/Random.py            ${Random_name_size}                                WITH NAME       random
+Variables  Other/Global.py
+Library  Libriary/BaseElement.py    suite       ${HOST}     ${USER}    ${PASSWORD}     WITH NAME       suite
+Library  Libriary/BaseElement.py    run         ${HOST}     ${USER}    ${PASSWORD}     WITH NAME       run
+Library  Libriary/BaseElement.py    section     ${HOST}     ${USER}    ${PASSWORD}     WITH NAME       section
+Library  Libriary/BaseElement.py    case        ${HOST}     ${USER}    ${PASSWORD}     WITH NAME       case
+Library  Other/Random.py            ${Random_name_size}                                WITH NAME       random
 
 *** Variables ***
 @{suite_fields} =       name        description
